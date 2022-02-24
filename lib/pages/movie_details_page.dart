@@ -99,7 +99,7 @@ class MovieDetailsPage extends StatelessWidget {
 Widget actorsInfo(BuildContext context, Movie movie) {
   final moviesProvider = MoviesProvider();
   return FutureBuilder(
-    future: moviesProvider.getCastForMovie(movie.id),
+    future: moviesProvider.getCastForMovie(movie.id.toString()),
     builder: (BuildContext context, AsyncSnapshot<List<Actor>> snapshot) {
       if (snapshot.hasData) {
         return SizedBox(

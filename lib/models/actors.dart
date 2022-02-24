@@ -6,7 +6,7 @@ class Actor {
   late int id;
   late String name;
   late int order;
-  late String profilePath;
+  late String? profilePath;
 
   Actor(
       {required this.castId,
