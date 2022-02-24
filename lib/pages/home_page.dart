@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/cards_swipper.dart';
+import '../components/populars.dart';
 import '../models/movies.dart';
 import '../providers/movies_provider.dart';
 
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _moviesProvider.getPlayingNow();
+    _moviesProvider.getPopular();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Movies'),
@@ -22,17 +24,37 @@ class HomePage extends StatelessWidget {
             IconButton(onPressed: () {}, icon: const Icon(Icons.search))
           ],
         ),
-        body: FutureBuilder(
-          future: _moviesProvider.getPlayingNow(),
-          builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
-            if (snapshot.hasData) {
-              return CardsSwipper(movies: snapshot.data as List<Movie>);
-            } else {
-              return Container(
-                  height: 400,
-                  child: const Center(child: CircularProgressIndicator()));
-            }
-          },
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FutureBuilder(
+              future: _moviesProvider.getPlayingNow(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
+                if (snapshot.hasData) {
+                  return CardsSwipper(movies: snapshot.data as List<Movie>);
+                } else {
+                  return const SizedBox(
+                      height: 400,
+                      child: Center(child: CircularProgressIndicator()));
+                }
+              },
+            ),
+            StreamBuilder(
+              stream: _moviesProvider.popularMoviesStream,
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
+                if (snapshot.hasData) {
+                  return Populars(
+                    popularMovies: snapshot.data as List<Movie>,
+                    nextPagePopulars: _moviesProvider.getPopular,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
+            )
+          ],
         ));
   }
 }

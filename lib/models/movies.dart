@@ -50,6 +50,10 @@ class Movie {
   String getPosterImage() {
     return 'https://image.tmdb.org/t/p/w500$posterPath';
   }
+
+  String getBackgroundImage() {
+    return 'https://image.tmdb.org/t/p/w500$backdropPath';
+  }
 }
 
 class Movies {
