@@ -4,6 +4,7 @@ import '../components/cards_swipper.dart';
 import '../components/populars.dart';
 import '../models/movies.dart';
 import '../providers/movies_provider.dart';
+import '../search/search_delegate.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -21,7 +22,11 @@ class HomePage extends StatelessWidget {
           centerTitle: false,
           backgroundColor: Colors.indigoAccent,
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+            IconButton(
+                onPressed: () {
+                  showSearch(context: context, delegate: MovieSearch());
+                },
+                icon: const Icon(Icons.search))
           ],
         ),
         body: Column(

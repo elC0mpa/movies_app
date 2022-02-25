@@ -45,13 +45,16 @@ class Populars extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 10),
                     child: Column(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: FadeInImage(
-                            placeholder:
-                                const AssetImage('assets/imgs/no-image.png'),
-                            image: NetworkImage(movie.getPosterImage()),
-                            fit: BoxFit.cover,
+                        Hero(
+                          tag: movie.id,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: FadeInImage(
+                              placeholder:
+                                  const AssetImage('assets/imgs/no-image.png'),
+                              image: NetworkImage(movie.getPosterImage()),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Text(

@@ -50,11 +50,14 @@ class MovieDetailsPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image(
-              image: NetworkImage(movie.getPosterImage()),
-              height: 150,
+          Hero(
+            tag: movie.id,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image(
+                image: NetworkImage(movie.getPosterImage()),
+                height: 150,
+              ),
             ),
           ),
           const SizedBox(
